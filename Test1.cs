@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -14,6 +15,7 @@ public class Contact
     [MaxLength(20)]
     public string Phone { get; set; } = "";
 }
+
 
 public class Person
 {
@@ -37,7 +39,12 @@ public class TestDbContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Person>().Property(p => p.RowVersion).IsRowVersion();
+        modelBuilder.Entity<Person>(entity =>
+        {
+            entity.ToTable( t => t.IsTemporal());
+
+            entity.Property(e => e.RowVersion).IsRowVersion();
+        });
     }
 }
 

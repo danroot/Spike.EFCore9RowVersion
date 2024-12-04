@@ -12,7 +12,7 @@ using Spike.EFCore9RowVersion;
 namespace Spike.EFCore9RowVersion.Migrations
 {
     [DbContext(typeof(TestDbContext))]
-    [Migration("20241204144401_RowVersion")]
+    [Migration("20241204150135_RowVersion")]
     partial class RowVersion
     {
         /// <inheritdoc />
