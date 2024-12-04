@@ -23,6 +23,8 @@ public class Person
     [MaxLength(100)]
     public string LastName { get; set; } = "";
     public IList<Contact> Contacts { get; set; } = [];
+
+    public byte[] RowVersion { get; set; }  
 }
 
 public class TestDbContext : DbContext
@@ -35,7 +37,7 @@ public class TestDbContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        modelBuilder.Entity<Person>().Property(p => p.RowVersion).IsRowVersion();
     }
 }
 
